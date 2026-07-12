@@ -127,8 +127,21 @@ body {
 }
 
 .page-layout.three-col {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr) 350px;
+  grid-template-areas:
+    "left main       right"
+    "left experience right";
+  column-gap: 28px;
+  row-gap: 0;
+  align-items: start;
   justify-content: center;
 }
+
+.page-layout.three-col .sidebar-left  { grid-area: left; }
+.page-layout.three-col .main-content  { grid-area: main; }
+.page-layout.three-col .sidebar-right { grid-area: right; }
+.page-layout.three-col .experience-block { grid-area: experience; }
 
 .main-content {
   flex: 1;
@@ -593,7 +606,9 @@ a:hover { color: var(--green); }
     width: auto;
   }
 
-  .page-layout {
+  .page-layout,
+  .page-layout.three-col {
+    display: flex;
     flex-direction: column;
   }
 
@@ -601,12 +616,12 @@ a:hover { color: var(--green); }
   .sidebar-right {
     width: 100%;
     position: static;
-    order: 2;
   }
 
-  .main-content {
-    order: 1;
-  }
+  .page-layout.three-col .main-content     { order: 1; }
+  .page-layout.three-col .sidebar-right    { order: 2; }
+  .page-layout.three-col .experience-block { order: 3; }
+  .page-layout.three-col .sidebar-left     { order: 4; }
 
   .sidebar {
     width: 100%;
