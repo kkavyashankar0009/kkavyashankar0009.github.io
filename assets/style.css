@@ -127,21 +127,8 @@ body {
 }
 
 .page-layout.three-col {
-  display: grid;
-  grid-template-columns: 250px minmax(0, 1fr) 350px;
-  grid-template-areas:
-    "left main       right"
-    "left experience right";
-  column-gap: 28px;
-  row-gap: 0;
-  align-items: start;
   justify-content: center;
 }
-
-.page-layout.three-col .sidebar-left  { grid-area: left; }
-.page-layout.three-col .main-content  { grid-area: main; }
-.page-layout.three-col .sidebar-right { grid-area: right; }
-.page-layout.three-col .experience-block { grid-area: experience; }
 
 .main-content {
   flex: 1;
@@ -161,6 +148,9 @@ body {
   position: sticky;
   top: 68px;
 }
+
+/* Weekend Builds duplicate shown only on mobile (before Experience) */
+.weekend-mobile { display: none; }
 
 .sidebar {
   width: 280px;
@@ -606,9 +596,7 @@ a:hover { color: var(--green); }
     width: auto;
   }
 
-  .page-layout,
-  .page-layout.three-col {
-    display: flex;
+  .page-layout {
     flex-direction: column;
   }
 
@@ -616,12 +604,16 @@ a:hover { color: var(--green); }
   .sidebar-right {
     width: 100%;
     position: static;
+    order: 2;
   }
 
-  .page-layout.three-col .main-content     { order: 1; }
-  .page-layout.three-col .sidebar-right    { order: 2; }
-  .page-layout.three-col .experience-block { order: 3; }
-  .page-layout.three-col .sidebar-left     { order: 4; }
+  .main-content {
+    order: 1;
+  }
+
+  /* On mobile, show the inline Weekend Builds (before Experience) and hide the right-column copy */
+  .weekend-mobile { display: block; width: 100%; margin-bottom: 28px; }
+  .sidebar-right { display: none; }
 
   .sidebar {
     width: 100%;
